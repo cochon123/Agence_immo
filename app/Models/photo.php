@@ -20,6 +20,6 @@ class photo extends Model
 
     public function photourl () : string
     {
-        return Storage::url("/photos/".$this->liens);
+        return Storage::url("photos/".$this->liens);
     }
 }

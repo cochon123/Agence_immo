@@ -19,7 +19,15 @@ class Biencontroller extends Controller
 
     public function biens() : View
     {
-        $biens = Bien::select('titre', 'slug', 'surface', 'prix', 'ville', 'code_postal', 'description')->paginate();
+        $biens = Bien::select('id', 'titre', 'slug', 'surface', 'prix', 'ville', 'code_postal', 'description')->paginate();
         return view('biens', [ 'biens' => $biens ]);
+    }
+
+    public function single(String $slug)
+    {
+        $bien = Bien::all()->where('slug', '=', $slug)->first();
+        //return view('single', [ 'bien' => $bien ]);
+        return view('single', [ 'bien' => $bien ]);
+
     }
 }
