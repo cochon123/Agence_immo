@@ -2,7 +2,7 @@
     <form action="" method="post" enctype="multipart/form-data">
         @csrf
 
-        @php
+    @php
         $champs_nombre = ['nb_pieces','prix','nb_chambres','nb_étages','code_postal','surface'];
 
         $champs_string = ['titre','adresse','ville'];
@@ -24,7 +24,7 @@
         <label for="{{$champ}}" class="form-label">{{$champ}} du bien</label>
         <input type="text" class="form-control" name="{{$champ}}" value='lala'>
     </div>
-    @error('{{$champ}}')
+    @error('image')
         {{$message}}
     @enderror
 
@@ -45,12 +45,25 @@
           <label for="{{$champ}}" class="form-label">{{$champ}} du bien</label>
           <input type="number" class="form-control" name="{{ $champ }}" value='42'>
       </div>
-      @error('{{$champ}}')
+      @error('titre')
           {{$message}}
       @enderror
 
     @endforeach
 
+    <div class="mb-3">
+        <label class="form-label" for="input-file">Select Files:</label>
+        <input 
+            type="file" 
+            name="photos[]" 
+            id="input-file"
+            multiple 
+            class="form-control @error('photos') is-invalid @enderror">
+
+        @error('photos')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
 
 
 

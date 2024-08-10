@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Bien;
+use App\Models\photo;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('biens', function (Blueprint $table) {
-            $table->id('bien_id')->primary();
+            $table->id('id')->primary();
             $table->string('slug');
             $table->boolean('vendu')->default(false);
             $table->string('titre')->unique();
@@ -28,6 +30,7 @@ return new class extends Migration
             $table->text('description');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -36,5 +39,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('biens');
+        Schema::table('photos', function (Blueprint $table) {
+            $table->dropforeignIdFor(Bien::class);
+        });
     }
 };

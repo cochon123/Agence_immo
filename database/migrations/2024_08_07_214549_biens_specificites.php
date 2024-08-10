@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('biens_specificites', function (Blueprint $table) {
             $table->string('titre');
-            $table->string('bien_id');
+            $table->string('id');
         });
     }
 

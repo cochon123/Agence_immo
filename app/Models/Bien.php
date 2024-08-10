@@ -24,4 +24,8 @@ class Bien extends Model
         'ville',
         'code_postal',
     ];
+
+    public function photos () {
+        return $this->hasMany(photo::class);
+    }
 }

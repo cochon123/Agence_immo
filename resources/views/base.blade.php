@@ -19,12 +19,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
 
+          @auth
           <li class="nav-item">
             <a class="nav-link" href="{{route('create')}}">créer un nouvel article</a>
           </li>
+          @endauth
+
 
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="{{route('home')}}">acceuil</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('biens')}}">Nos biens</a>
           </li>
           
         </ul>

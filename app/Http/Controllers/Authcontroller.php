@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Authcontroller extends Controller
 {
@@ -21,7 +23,7 @@ class Authcontroller extends Controller
             return redirect()->intended(route('home'));//provisiore
         }
 
-        return to_route('auth.login')->withErrors([
+        return to_route('login')->withErrors([
             'email' => 'Email invalide',
             'password' => 'Mot de passe incorect',
         ])->onlyInput('email');

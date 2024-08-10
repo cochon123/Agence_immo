@@ -4,11 +4,15 @@
 
 @section('content')
     <h1>Agence immobilière</h1></br>
-
+    <div class="d-flex flex-nowrap">
     @foreach ($biens as $bien)
 
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <img src=
+                @if($bien->photos()->first() !== null) 
+                    {{$bien->photos()->first()->photourl()}}
+                @endif
+                 class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">{{ $bien->titre }}</h5><br>
             {{$bien -> prix}} - {{ $bien -> ville}} ( {{$bien -> code_postal}} )
@@ -18,8 +22,13 @@
             <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
+    @endforeach
+    </div>
 
+    @foreach ($biens as $bien)
+    @if($bien->photos() !== null) 
+    {{$bien->photos()->get()}}
+    @endif
     @endforeach
 
-    {{ $biens -> links()}}
 @endsection
