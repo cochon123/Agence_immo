@@ -35,7 +35,7 @@
             <a href={{ $bien->slug.'-' }}  class="btn btn-primary">En savoir plus</a><br>
             @auth
                 <a href={{ "admin/edit/".$bien->slug }}  class="btn btn-primary">Editer</a><br>
-                <a href={{ "/".$bien->slug }}  class="btn btn-danger">Supprimer</a>
+                <a href={{ "admin/delete/".$bien->slug }}  class="btn btn-danger">Supprimer</a>
             @endauth
             </div>
         </div>

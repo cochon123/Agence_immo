@@ -65,6 +65,13 @@ class Admincontroller extends Controller
         return to_route('show', ['slug' => $slug])->with('success', 'bien modifié avec succes!');
     }
 
+    public function delete_bien(String $slug)
+    {
+        $bien = Bien::all()->where('slug', '=', $slug)->first();
+        $bien->delete();
+        return to_route('biens')->with('success', 'bien supprimé avec succes!');
+    }
+
     public function delete_photo(Request $request)
     {
         $path = "photos/".$request->liens;

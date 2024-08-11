@@ -25,6 +25,8 @@ Route::controller(Admincontroller::class)->prefix('/admin')->middleware('auth')-
     Route::get('/edit/{slug}', 'edit')->where([ 'slug' => '[a-z0-9\-]+', ])->name('edit');
     Route::post('/edit/{slug}', 'update')->where([ 'slug' => '[a-z0-9\-]+', ])->name('update');
 
+    Route::get('/delete/{slug}', 'delete_bien')->where([ 'slug' => '[a-z0-9\-]+', ])->name('delete_bien');
+
     Route::post('/delete_photo', 'delete_photo')->name('delete_photo');
 
     Route::post('/add_photo', 'add_photo')->name('add_photo');
