@@ -32,7 +32,11 @@
             <p class="card-text" class="col-sm-30 text-truncate">
                 <div class="col-sm-30 text-truncate">{{$bien -> description}}</div>
             </p>
-            <a href={{ $bien->slug.'-' }}  class="btn btn-primary">En savoir plus</a>
+            <a href={{ $bien->slug.'-' }}  class="btn btn-primary">En savoir plus</a><br>
+            @auth
+                <a href={{ "admin/edit/".$bien->slug }}  class="btn btn-primary">Editer</a><br>
+                <a href={{ "/".$bien->slug }}  class="btn btn-danger">Supprimer</a>
+            @endauth
             </div>
         </div>
 

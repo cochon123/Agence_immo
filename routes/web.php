@@ -20,7 +20,15 @@ Route::controller(Biencontroller::class)->group( function () {
 
 Route::controller(Admincontroller::class)->prefix('/admin')->middleware('auth')->group( function () {
     Route::get('/new', 'create')->name('create');
-    Route::post('/new', 'store')->name('store'); 
+    Route::post('/new', 'store')->name('store');
+
+    Route::get('/edit/{slug}', 'edit')->where([ 'slug' => '[a-z0-9\-]+', ])->name('edit');
+
+    Route::post('/delete_photo', 'delete_photo')->name('delete_photo');
+
+    Route::post('/add_photo', 'add_photo')->name('add_photo');
+
+
 } );
 
 Route::get('/login', [Authcontroller::class, 'login'])->name('login');

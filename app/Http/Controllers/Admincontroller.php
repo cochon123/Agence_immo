@@ -8,6 +8,7 @@ use App\Models\photo;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class Admincontroller extends Controller
 {
@@ -46,5 +47,45 @@ class Admincontroller extends Controller
         }
 
         return back()->with('success', 'bien crée avec succes!'); 
+    }
+
+    public function edit(String $slug)
+    {
+        $bien = Bien::all()->where('slug', '=', $slug)->first();
+        return view('create', [
+            'bien' => $bien,
+        ]);
+    }
+
+    public function delete_photo(Request $request)
+    {
+        $path = "photos/".$request->liens;
+        Storage::disk('public')->delete( $path );
+        photo::Where('liens', '=' ,$request->liens)->delete();
+        return back()->with('success', 'la photo a été avec succes!');
+    }
+
+    public function add_photo(Request $request)
+    {
+        $files = [];
+        foreach($request->file('photos') as $file) {
+            // Generate a unique name for the file
+            $file_name = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+              
+            // Move the file to the desired location
+            $file->storeAs('photos', $file_name, 'public');
+  
+            $files[] = ['name' => $file_name];
+        }
+
+        $id = $request->id;
+        foreach ($files as $fileData) {
+            photo::create([
+                "liens" => $fileData['name'],
+                "bien_id" => $id,
+            ]);
+        }
+
+        return back()->with('success', 'photo(s) ajoutée(s) avec succes!'); 
     }
 }
