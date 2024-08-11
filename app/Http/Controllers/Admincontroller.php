@@ -57,6 +57,14 @@ class Admincontroller extends Controller
         ]);
     }
 
+    public function update(Bienfilterrequest $request, String $slug)
+    {
+        $bien = Bien::all()->where('slug', '=', $slug)->first();
+        $bien->update($request->validated());
+        $slug = $request->slug;
+        return to_route('show', ['slug' => $slug])->with('success', 'bien modifié avec succes!');
+    }
+
     public function delete_photo(Request $request)
     {
         $path = "photos/".$request->liens;

@@ -37,8 +37,8 @@ class Bienfilterrequest extends FormRequest
             'nb_étages' => ['required'],
             'chauffage' => ['required'],
             'description' => ['required'],
-            'photos' => ['required', 'array'],
-            'photos.*' => ['required', 'image'],
+            'photos' => ['array'],
+            'photos.*' => ['image'],
         ];
 
     }
