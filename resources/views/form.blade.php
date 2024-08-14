@@ -76,6 +76,23 @@
           <label for="surface" class="form-label">surface du bien</label>
           <input type="number" class="form-control" name="surface" value='{{ old( 'surface', $bien ->surface) }}'>
       </div>
+
+      @if (!$bien->id)
+      <div class="mb-3">
+          <label class="form-label" for="input-file">Select Files:</label>
+          @csrf
+          <input 
+              type="file" 
+              name="photos[]" 
+              id="input-file"
+              multiple 
+              class="form-control @error('photos') is-invalid @enderror">
+              <input type="hidden" name="id" value="{{$bien->id}}">
+          @error('photos')
+              <span class="text-danger">{{ $message }}</span>
+          @enderror
+      @endif
+
       <button type="submit" class="btn btn-primary">
         @if ($bien->id)
             Modifier
@@ -137,6 +154,7 @@
     </form>
 @endforeach
 
+@if ($bien->id)
 <form action="{{ route('add_photo') }}" method="POST" enctype="multipart/form-data">
 
     <div class="mb-3">
@@ -154,6 +172,7 @@
         <span class="text-danger">{{ $message }}</span>
     @enderror
 </form>
+@endif
 
 </div>
 </div>

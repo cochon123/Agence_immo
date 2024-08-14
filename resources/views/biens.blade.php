@@ -17,9 +17,11 @@
     <br>
 
     <div class="container">
-    <div class="grid-container d-flex flex-nowrap" style="grid-container {grid-template-columns: auto auto auto auto; display:grid;}">
+    <div class="grid-container d-flex flex-nowrap" >
+    @php $i=0 ; @endphp
     @foreach ($biens as $bien)
-
+        @php $i++ ; @endphp
+        @if ($i%4 == 0) <div class="row"> @endif
         <div class="card grid-item" style="width: 18rem;">
             <img src=
                 @if($bien->photos()->first() !== null) 
@@ -39,7 +41,7 @@
             @endauth
             </div>
         </div>
-
+        @if ($i%4 == 0)   </div> @endif
     @endforeach
     </div>
     </div>

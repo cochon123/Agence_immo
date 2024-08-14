@@ -46,7 +46,7 @@ class Admincontroller extends Controller
             ]);
         }
 
-        return back()->with('success', 'bien crée avec succes!'); 
+        return to_route('show', ['slug' => $data['slug']])->with('success', 'bien crée avec succes!'); 
     }
 
     public function edit(String $slug)
@@ -68,10 +68,15 @@ class Admincontroller extends Controller
     public function delete_bien(String $slug)
     {
         $bien = Bien::all()->where('slug', '=', $slug)->first();
+        $photos = photo::all()->where('bien_id', '=', $bien->id);
+        foreach ($photos as $item) {
+            $path = "photos/".$item->liens;
+            Storage::disk('public')->delete( $path );
+            $item->delete(); 
+        }
         $bien->delete();
         return to_route('biens')->with('success', 'bien supprimé avec succes!');
     }
-
     public function delete_photo(Request $request)
     {
         $path = "photos/".$request->liens;
