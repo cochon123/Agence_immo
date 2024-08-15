@@ -27,6 +27,7 @@
                 @if($bien->photos()->first() !== null) 
                     {{$bien->photos()->first()->photourl()}}
                 @endif
+                width="200px" height="200px"
                  class="card-img-top" alt="...">
             <div class="card-body" >
             <h5 class="card-title">{{ $bien->titre }}</h5><br>

@@ -31,7 +31,7 @@
                     <div class="carousel-inner">
                         @foreach ($bien->photos()->get() as $photo)
                             <div class="carousel-item active">
-                                <img src={{$photo->photourl()}} class="d-block w-100" alt="...">
+                                <img src={{$photo->photourl()}} width="780px" height="450px" class="d-block w-100" alt="...">
                             </div>
                         @endforeach
                     </div>

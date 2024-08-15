@@ -19,7 +19,7 @@ class Biencontroller extends Controller
 
     public function biens() : View
     {
-        $biens = Bien::select('id', 'titre', 'slug', 'surface', 'prix', 'ville', 'code_postal', 'description')->paginate();
+        $biens = Bien::select('id', 'titre', 'slug', 'surface', 'prix', 'ville', 'code_postal', 'description')->paginate(4);
         return view('biens', [ 'biens' => $biens ]);
     }
 

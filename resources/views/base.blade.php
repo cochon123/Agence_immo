@@ -48,7 +48,13 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('biens')}}">Nos biens</a>
           </li>
-          
+          @auth
+              
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('specificite')}}">specificite</a>
+            </li>
+
+          @endauth
         </ul>
         <div class='navbar-nav ms-auto mb-2 mb-lg-0'>
           @auth

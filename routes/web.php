@@ -31,6 +31,8 @@ Route::controller(Admincontroller::class)->prefix('/admin')->middleware('auth')-
 
     Route::post('/add_photo', 'add_photo')->name('add_photo');
 
+    Route::get('/specificite', 'specificite')->name('specificite');
+    Route::post('/add_specificite', 'add_specificite')->name('add_specificite');
 
 } );
 

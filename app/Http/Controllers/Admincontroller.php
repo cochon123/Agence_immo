@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Bienfilterrequest;
 use App\Models\Bien;
 use App\Models\photo;
+use App\Models\specificite;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -107,5 +108,11 @@ class Admincontroller extends Controller
         }
 
         return back()->with('success', 'photo(s) ajoutée(s) avec succes!'); 
+    }
+
+    public function specificite()
+    {
+        $specificite = specificite::all();
+        return $specificite;
     }
 }

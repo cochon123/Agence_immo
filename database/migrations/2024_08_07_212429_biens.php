@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('titre')->unique();
             $table->string('adresse')->unique();
             $table->string('ville');
-            $table->integer('code_postal');
+            $table->string('code_postal');
             $table->integer('surface');
             $table->integer('nb_pieces');
             $table->integer('prix');
