@@ -46,7 +46,7 @@
                   </div>
             </div>
             <div class="col-md-6">
-                <h1 class="title">{{$bien->titre}}</h1>
+                <h1 class="title text-warning">{{$bien->titre}}</h1>
                 <p><strong>Nombre de pièces :</strong> {{$bien->nb_pieces}}</p>
                 <p><strong>Surface :</strong> {{$bien->surface}} m²</p>
                 <p class="price">{{$bien->prix}} $</p>
@@ -89,7 +89,7 @@
                     {{$bien->description}}
             </div>
             <div class="col-md-6 mt-5">
-                <h2>Contactez-nous</h2>
+                <h2 class="text-warning">Contactez-nous</h2>
                 <form>
                     <div class="form-group">
                         <label for="nom">Nom</label>
@@ -113,6 +113,19 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Nous contacter</button>
                 </form>
+            </div>
+
+            <div class="col-md-6 mt-5">
+                <h2 class="mb-4 text-warning">spécificités</h2>
+                <table class="table table-bordered">
+                    <tbody>
+                        @foreach ($bien->specificites()->get() as $item)
+                            <tr>
+                                <td>{{$item->titre}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

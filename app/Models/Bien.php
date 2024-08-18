@@ -28,4 +28,7 @@ class Bien extends Model
     public function photos () {
         return $this->hasMany(photo::class);
     }
+    public function specificites() {
+        return $this->belongsToMany(specificite::class);
+    }
 }

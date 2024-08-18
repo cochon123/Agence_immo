@@ -11,4 +11,8 @@ class specificite extends Model
     protected $fillable = [
         'titre',
     ];
+
+    public function Biens() {
+        return $this->belongsToMany(Bien::class);
+    }
 }

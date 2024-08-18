@@ -39,6 +39,7 @@ class Bienfilterrequest extends FormRequest
             'description' => ['required'],
             'photos' => ['array'],
             'photos.*' => ['image'],
+            'specificites' => ['array', 'exists:specificites,id'],
         ];
 
     }

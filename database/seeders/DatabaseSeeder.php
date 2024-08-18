@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Bien;
+use App\Models\specificite;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Bien::factory()->count(50)->create();
+        specificite::factory(7)->create();
     }
 }

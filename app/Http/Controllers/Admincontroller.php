@@ -18,21 +18,27 @@ class Admincontroller extends Controller
         $bien = new Bien();
         $bien -> title = 'titre du bien';
         $bien -> description = 'description du bien';
+
+        $specificite = specificite::all();
+        
         return view('create', [
             'bien' => $bien,
+            'specificites' => $specificite,
         ]);
     }
 
     public function store(Bienfilterrequest $request)
     {
         $data = $request->validated();
-        Bien::create(Arr::except($data, ['photos']));
+        $bien = Bien::create(Arr::except($data, ['photos']));
+
+        $bien->specificites()->sync($data['specificites']);
 
         $files = [];
         foreach($request->file('photos') as $file) {
             // Generate a unique name for the file
             $file_name = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-              
+
             // Move the file to the desired location
             $file->storeAs('photos', $file_name, 'public');
   
@@ -53,15 +59,20 @@ class Admincontroller extends Controller
     public function edit(String $slug)
     {
         $bien = Bien::all()->where('slug', '=', $slug)->first();
+        $specificite = specificite::all();
+
         return view('create', [
+            'specificites' => $specificite,
             'bien' => $bien,
         ]);
     }
 
     public function update(Bienfilterrequest $request, String $slug)
     {
+        $data = $request->validated();
         $bien = Bien::all()->where('slug', '=', $slug)->first();
-        $bien->update($request->validated());
+        $bien->update($data);
+        $bien->specificites()->sync($data['specificites']);
         $slug = $request->slug;
         return to_route('show', ['slug' => $slug])->with('success', 'bien modifié avec succes!');
     }
@@ -110,9 +121,4 @@ class Admincontroller extends Controller
         return back()->with('success', 'photo(s) ajoutée(s) avec succes!'); 
     }
 
-    public function specificite()
-    {
-        $specificite = specificite::all();
-        return $specificite;
-    }
 }

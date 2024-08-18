@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admincontroller;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\Biencontroller;
+use App\Http\Controllers\SpecificiteController;
 use Illuminate\Support\Facades\Route;
 
 /* Route::get('/', function () {
@@ -15,7 +16,7 @@ Route::controller(Biencontroller::class)->group( function () {
     Route::get('/{slug}-', 'single')->where([ 'slug' => '[a-z0-9\-]+', ])->name('show');
     Route::get('/biens', 'biens')->name('biens');
     Route::post('/biens', 'select_biens')->name('select_biens');
-    
+
 } );
 
 Route::controller(Admincontroller::class)->prefix('/admin')->middleware('auth')->group( function () {
@@ -31,10 +32,9 @@ Route::controller(Admincontroller::class)->prefix('/admin')->middleware('auth')-
 
     Route::post('/add_photo', 'add_photo')->name('add_photo');
 
-    Route::get('/specificite', 'specificite')->name('specificite');
-    Route::post('/add_specificite', 'add_specificite')->name('add_specificite');
-
 } );
+
+Route::resource('specificite', SpecificiteController::class)->middleware('auth');
 
 Route::get('/login', [Authcontroller::class, 'login'])->name('login');
 Route::post('/login', [Authcontroller::class, 'dologin'])->name('login');

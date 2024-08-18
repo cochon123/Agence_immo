@@ -25,7 +25,7 @@ class Biencontroller extends Controller
 
     public function single(String $slug)
     {
-        $bien = Bien::all()->where('slug', '=', $slug)->first();
+        $bien = Bien::with('specificites')->with('photos')->where('slug', '=', $slug)->first();
         //return view('single', [ 'bien' => $bien ]);
         return view('single', [ 'bien' => $bien ]);
 

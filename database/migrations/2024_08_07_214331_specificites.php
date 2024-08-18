@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('specificites', function (Blueprint $table) {
             $table->id('id')->primary();
             $table->string('titre');
+            $table->timestamps();
         });
     }
 

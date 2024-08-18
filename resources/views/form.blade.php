@@ -1,84 +1,105 @@
 <div class="w-75 p-3 align-self-center">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form {{-- action="4" --}} method="POST" enctype="multipart/form-data">
         @csrf
-
-    @php
-        $champs_nombre = ['nb_pieces','prix','nb_chambres','nb_étages','code_postal','surface'];
-
-        $champs_string = ['titre','adresse','ville'];
-    @endphp
 
     <div class="form-check form-switch">
         <input class="form-check-input" name="chauffage" type="checkbox" role="switch" id="flexSwitchCheckDefault" @checked($bien ->chauffage == 1)>
         <label class="form-check-label" for="flexSwitchCheckDefault">chauffage</label>
+        @error('chauffage')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
 
     <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" name="vendu" role="switch" id="flexSwitchCheckDefault" @checked($bien ->vendu == 1)>
         <label class="form-check-label" for="flexSwitchCheckDefault">vendu</label>
+        @error('vendu')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
 
     <div class="mb-3">
         <label for="titre" class="form-label">titre du bien</label>
         <input type="text" class="form-control" name="titre" value='{{ old( 'titre', $bien ->titre) }}'>
+        @error('titre')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
-    
     
     <div class="mb-3">
         <label for="adresse" class="form-label">adresse du bien</label>
         <input type="text" class="form-control" name="adresse" value='{{ old( 'adresse', $bien ->adresse) }}'>
+        @error('adresse')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
-    
     
     <div class="mb-3">
         <label for="ville" class="form-label">ville du bien</label>
         <input type="text" class="form-control" name="ville" value='{{ old( 'ville', $bien ->ville) }}'>
+        @error('ville')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
-    
     
     <div class="mb-3">
         <label for="description" class="form-label">description du bien</label>
         <Textarea name='description' class="form-control" >{{ old( 'titre', $bien ->description) }}</Textarea>
-      </div>
+        @error('description')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
       
-    
       <div class="mb-3">
           <label for="nb_pieces" class="form-label">nombre de pieces du bien</label>
           <input type="number" class="form-control" name="nb_pieces" value='{{ old( 'nb_pieces', $bien ->nb_pieces) }}'>
-      </div>
+        @error('nb_pieces')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
       
-    
       <div class="mb-3">
           <label for="prix" class="form-label">prix du bien</label>
           <input type="number" class="form-control" name="prix" value='{{ old( 'prix', $bien ->prix) }}'>
+        @error('prix')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
       
-    
       <div class="mb-3">
           <label for="nb_chambres" class="form-label">nombre de chambres du bien</label>
           <input type="number" class="form-control" name="nb_chambres" value='{{ old( 'nb_chambres', $bien ->nb_chambres) }}'>
+        @error('nb_chambres')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
       
-    
       <div class="mb-3">
           <label for="nb_étages" class="form-label">nombre de étages du bien</label>
           <input type="number" class="form-control" name="nb_étages" value='{{ old( 'nb_étages', $bien ->nb_étages) }}'>
+        @error('nb_étages')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
       
-    
       <div class="mb-3">
           <label for="code_postal" class="form-label">code postal du bien</label>
           <input type="number" class="form-control" name="code_postal" value='{{ old( 'code_postal', $bien ->code_postal) }}'>
+        @error('code_postal')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
       
-    
       <div class="mb-3">
           <label for="surface" class="form-label">surface du bien</label>
           <input type="number" class="form-control" name="surface" value='{{ old( 'surface', $bien ->surface) }}'>
+        @error('surface')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
       </div>
 
-      @if (!$bien->id)
-      <div class="mb-3">
+    @if (!$bien->id)
+        <div class="mb-3">
           <label class="form-label" for="input-file">Select Files:</label>
           @csrf
           <input 
@@ -91,15 +112,22 @@
           @error('photos')
               <span class="text-danger">{{ $message }}</span>
           @enderror
-      @endif
+        </div>
+    @endif
 
-      <button type="submit" class="btn btn-primary">
-        @if ($bien->id)
-            Modifier
-        @else
-            créer
-        @endif
-    </button>
+    <div class="mb-3">
+        <label for="surface" class="form-label">spécificités du bien</label>
+        <select id="specificites" name="specificites[]" data-placeholder="Selectionner des spécificités" multiple data-multi-select>
+            @foreach ($specificites as $item)
+                <option value="{{$item->id}}" @selected($bien->specificites()->pluck('id')->contains($item->id))>{{$item->titre}}</option>
+            @endforeach
+        </select>
+        @error('specificites')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="@if ($bien->id) Modifier @else créer @endif">
 </form>
 
 
