@@ -6,11 +6,12 @@
     <h1>Agence immobilière</h1></br>
 
     <div class="d-flex flex-nowrap">
-        <form method="POST" action="{{ route ('biens')}}">
-            <input type='number' name='surface_min' placeholder="Surface minimum">
-            <input type='number' name='nb_pieces_min' placeholder="Nombre de pièces minimum">
-            <input type='number' name='budget_max' placeholder="Budget maximum">
-            <input type="text" name='mot_clef' placeholder="utiliser un mot clef">
+        <form method="POST" action="{{ route('select_biens')}}">
+            @csrf
+            <input type='number' name='surface_min' placeholder="Surface minimum" value= {{old('surface_min')}} >
+            <input type='number' name='nb_pieces_min' placeholder="Nombre de pièces minimum" value= {{@old('nb_pieces_min')}} >
+            <input type='number' name='budget_max' placeholder="Budget maximum" value= {{old('budget_max')}} >
+            <input type="text" name='mot_clef' placeholder="utiliser un mot clef" value= {{old('mot_clef')}}>
             <input type='submit' value='rechercher'>
         </form>
     </div>

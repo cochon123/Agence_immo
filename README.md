@@ -63,4 +63,80 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT)
+
+je ne sais pas si j'ai le droit de faire ca, je n'ai jamais appris comment faire un bon repository
+je vais juste copier coller un truc que chat gpt m'as donné pour faire des recherche approximative
+
+<!-- Oui, Laravel propose plusieurs solutions pour effectuer des recherches approximatives à partir de mots-clés. L'une des méthodes les plus populaires est d'utiliser **Laravel Scout**, qui permet d'intégrer des moteurs de recherche comme Algolia, Meilisearch, ou Elasticsearch dans ton application Laravel¹.
+
+Voici un aperçu de la façon dont tu peux configurer Laravel Scout pour effectuer des recherches textuelles :
+
+1. **Installation de Laravel Scout** :
+    ```bash
+    composer require laravel/scout
+    ```
+
+2. **Configuration de Laravel Scout** :
+    Ajoute le service provider dans `config/app.php` :
+    ```php
+    'providers' => [
+        // ...
+        Laravel\Scout\ScoutServiceProvider::class,
+    ],
+    ```
+
+    Publie la configuration de Scout :
+    ```bash
+    php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
+    ```
+
+3. **Choix du moteur de recherche** :
+    Configure le moteur de recherche dans `config/scout.php`. Par exemple, pour utiliser Algolia :
+    ```php
+    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    ```
+
+4. **Marquage des modèles pour l'indexation** :
+    Utilise le trait `Searchable` dans ton modèle :
+    ```php
+    use Laravel\Scout\Searchable;
+
+    class Article extends Model
+    {
+        use Searchable;
+    }
+    ```
+
+5. **Indexation des données** :
+    Pour indexer les données existantes :
+    ```bash
+    php artisan scout:import "App\Models\Article"
+    ```
+
+6. **Recherche dans les modèles** :
+    Tu peux maintenant effectuer des recherches approximatives :
+    ```php
+    $articles = Article::search('mot clé')->get();
+    ```
+
+En utilisant Laravel Scout, tu peux facilement ajouter des fonctionnalités de recherche puissante et flexible à ton application¹².
+
+Si tu préfères une solution plus simple, tu peux également utiliser des requêtes SQL avec des clauses `LIKE` pour des recherches approximatives :
+```php
+$results = DB::table('articles')
+    ->where('title', 'like', '%mot clé%')
+    ->orWhere('content', 'like', '%mot clé%')
+    ->get();
+```
+
+N'hésite pas à me dire si tu as besoin de plus de détails ou d'aide pour la mise en place ! 😊
+
+¹: [Utiliser Laravel Scout pour activer la recherche textuelle](https://kinsta.com/fr/blog/laravel-scout-recherche-textuelle/)
+²: [Laravel/Searchbar : comment être plus pertinent dans une recherche multi-mots ?](https://www.developpez.net/forums/d2134375/php/bibliotheques-frameworks/laravel/laravel-searchbar-etre-plus-pertinent-recherche-multi-mots/)
+
+Source : conversation avec Copilot, 18/08/2024
+(1) Utiliser Laravel Scout pour activer la recherche textuelle. https://kinsta.com/fr/blog/laravel-scout-recherche-textuelle/.
+(2) Laravel/Searchbar : comment être plus pertinent dans une recherche .... https://www.developpez.net/forums/d2134375/php/bibliotheques-frameworks/laravel/laravel-searchbar-etre-plus-pertinent-recherche-multi-mots/.
+(3) Tutoriel Laravel 9 #8 : Moteur de recherche - Gekkode. https://www.gekkode.com/developpement/tutoriel-laravel-8-8-moteur-de-recherche/.
+(4) undefined. https://github.com/spatie/laravel-searchable. -->

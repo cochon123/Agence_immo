@@ -30,4 +30,30 @@ class Biencontroller extends Controller
         return view('single', [ 'bien' => $bien ]);
 
     }
+
+    public function select_biens(Request $request)
+    {
+        $biens = Bien::select('id', 'titre', 'slug', 'surface', 'prix', 'ville', 'code_postal', 'description');
+        //selectionner la surface min
+        if($request->surface_min !== null){
+            $biens = $biens->where('surface', '>=', $request->surface_min);
+        }
+
+        //selectionner le nombre de piece min
+        if($request->nb_pieces_min !== null){
+            $biens = $biens->where('nb_pieces', '>=', $request->nb_pieces_min);
+        }
+
+        //selectionner le nombre de piece min
+        if($request->budget_max !== null){
+            $biens = $biens->where('prix', '<=', $request->budget_max);
+        }
+
+        //selectionner le nombre de piece min
+        if($request->mot_clef !== null){
+            $biens = $biens->where('titre', 'LIKE', '%'.$request->mot_clef.'%');
+        }
+
+        return view('biens', [ 'biens' => $biens->paginate(4) ]);
+    }
 }
